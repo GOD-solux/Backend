@@ -60,7 +60,7 @@ public class OpenApiController {
                 .body(ResponseTemplate.from(responses));
     }
 
-    @Operation(summary = "추천 도서 목록보기", description = "추천 도서 목록보기")
+    @Operation(summary = "스포츠 목록보기", description = "스포츠 목록보기")
     @GetMapping("/sports")
     public ResponseEntity<ResponseTemplate<Object>> getSportsList(@RequestParam(defaultValue = "1") Integer pageNo) {
 
