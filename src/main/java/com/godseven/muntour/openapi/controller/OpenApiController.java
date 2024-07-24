@@ -3,10 +3,12 @@ package com.godseven.muntour.openapi.controller;
 import com.godseven.muntour.openapi.dto.response.BookResponseList;
 import com.godseven.muntour.openapi.dto.response.ExhibitionResponseList;
 import com.godseven.muntour.openapi.dto.response.PerformanceResponseList;
+import com.godseven.muntour.openapi.dto.response.SportsResponseList;
 import com.godseven.muntour.openapi.service.BookService;
 import com.godseven.muntour.openapi.service.ExhibitionService;
 import com.godseven.muntour.global.dto.ResponseTemplate;
 import com.godseven.muntour.openapi.service.PerformanceService;
+import com.godseven.muntour.openapi.service.SportsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class OpenApiController {
     private final ExhibitionService exhibitionService;
     private final PerformanceService performanceService;
     private final BookService bookService;
+    private final SportsService sportsService;
 
     @Operation(summary = "전시회 목록보기", description = "전시회 목록보기")
     @GetMapping("/exhibition")
@@ -52,6 +55,16 @@ public class OpenApiController {
     public ResponseEntity<ResponseTemplate<Object>> getBookList(@RequestParam(defaultValue = "1") Integer pageNo) {
 
         BookResponseList responses = bookService.getBookList(pageNo);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseTemplate.from(responses));
+    }
+
+    @Operation(summary = "추천 도서 목록보기", description = "추천 도서 목록보기")
+    @GetMapping("/sports")
+    public ResponseEntity<ResponseTemplate<Object>> getSportsList(@RequestParam(defaultValue = "1") Integer pageNo) {
+
+        SportsResponseList responses = sportsService.getSportsList(pageNo);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ResponseTemplate.from(responses));

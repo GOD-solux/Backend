@@ -27,7 +27,7 @@ public class PerformanceService implements OpenApiService<PerformanceResponse>{
     }
 
     @Override
-    public String makeUrl(int pageNo) {
+    public String makeUrl(Integer pageNo) {
         String url = PerformanceConst.ENDPOINT
                 + PerformanceConst.getServiceKey()
                 + PerformanceConst.NUM_OF_ROWS
@@ -37,7 +37,7 @@ public class PerformanceService implements OpenApiService<PerformanceResponse>{
     }
 
     @Override
-    public List<PerformanceResponse> fetchData(int pageNo) {
+    public List<PerformanceResponse> fetchData(Integer pageNo) {
         String apiUrl = makeUrl(pageNo);
         return openApiServiceUtil.fetchData(apiUrl, item ->
                 PerformanceResponse.builder()

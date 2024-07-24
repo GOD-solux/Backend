@@ -26,7 +26,7 @@ public class BookService implements OpenApiService<BookResponse> {
     }
 
     @Override
-    public String makeUrl(int pageNo) {
+    public String makeUrl(Integer pageNo) {
         String url = BookConst.ENDPOINT
                 + BookConst.getServiceKey()
                 + BookConst.NUM_OF_ROWS
@@ -36,7 +36,7 @@ public class BookService implements OpenApiService<BookResponse> {
     }
 
     @Override
-    public List<BookResponse> fetchData(int pageNo) {
+    public List<BookResponse> fetchData(Integer pageNo) {
         String apiUrl = makeUrl(pageNo);
         return openApiServiceUtil.fetchData(apiUrl, item ->
                 BookResponse.builder()

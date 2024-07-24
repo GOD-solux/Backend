@@ -27,7 +27,7 @@ public class ExhibitionService implements OpenApiService<ExhibitionResponse> {
     }
 
     @Override
-    public String makeUrl(int pageNo) {
+    public String makeUrl(Integer pageNo) {
         String url = ExhibitionConst.ENDPOINT
                 + ExhibitionConst.getServiceKey()
                 + ExhibitionConst.NUM_OF_ROWS
@@ -37,7 +37,7 @@ public class ExhibitionService implements OpenApiService<ExhibitionResponse> {
     }
 
     @Override
-    public List<ExhibitionResponse> fetchData(int pageNo) {
+    public List<ExhibitionResponse> fetchData(Integer pageNo) {
         String apiUrl = makeUrl(pageNo);
         return openApiServiceUtil.fetchData(apiUrl, item ->
                 ExhibitionResponse.builder()
