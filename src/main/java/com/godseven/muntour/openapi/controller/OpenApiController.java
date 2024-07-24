@@ -29,7 +29,7 @@ public class OpenApiController {
 
     @Operation(summary = "전시회 목록보기", description = "전시회 목록보기")
     @GetMapping("/exhibition")
-    public ResponseEntity<ResponseTemplate<Object>> getExhibitionList(@RequestParam(defaultValue = "1") int pageNo) {
+    public ResponseEntity<ResponseTemplate<Object>> getExhibitionList(@RequestParam(defaultValue = "1") Integer pageNo) {
 
         ExhibitionResponseList responses = exhibitionService.getExhibitionList(pageNo);
         return ResponseEntity
@@ -39,7 +39,7 @@ public class OpenApiController {
 
     @Operation(summary = "공연 목록보기", description = "공연 목록보기")
     @GetMapping("/performance")
-    public ResponseEntity<ResponseTemplate<Object>> getPerformanceList(@RequestParam(defaultValue = "1") int pageNo) {
+    public ResponseEntity<ResponseTemplate<Object>> getPerformanceList(@RequestParam(defaultValue = "1") Integer pageNo) {
 
         PerformanceResponseList responses = performanceService.getPerformanceList(pageNo);
         return ResponseEntity
@@ -49,7 +49,7 @@ public class OpenApiController {
 
     @Operation(summary = "추천 도서 목록보기", description = "추천 도서 목록보기")
     @GetMapping("/book")
-    public ResponseEntity<ResponseTemplate<Object>> getBookList(@RequestParam(defaultValue = "1") int pageNo) {
+    public ResponseEntity<ResponseTemplate<Object>> getBookList(@RequestParam(defaultValue = "1") Integer pageNo) {
 
         BookResponseList responses = bookService.getBookList(pageNo);
         return ResponseEntity
