@@ -2,10 +2,7 @@ package com.godseven.muntour.member.domain;
 
 import com.godseven.muntour.member.domain.type.Muntour;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +16,39 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
+    @Getter
+    @Setter
     private Long memberId;
 
     @Column(name = "id", length = 30)
     private String id;
 
+    @Getter
+    @Setter
     @Column(name = "password", length = 30)
     private String password;
 
     @Column(name = "nickname", length = 30)
     private String nickname;
 
+    @Getter
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "muntour_type")
     private Muntour muntourType;
 
+    @Getter
+    @Setter
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Getter
+    @Setter
     @Column(name = "image_folder", length = 50)
     private String imageFolder;
 
+    @Getter
+    @Setter
     @Column(name = "image_name", length = 100)
     private String imageName;
 
