@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "UsersController", description = "마이페이지")
@@ -31,7 +30,7 @@ public class UsersController {
     // 테스트 유형 결과 불러오기 GET
     @Operation(summary = "테스트 유형 결과 불러오기", description = "테스트 유형 결과 불러오기")
     @GetMapping("/users/muntour-type")
-    public TypeJoinResponseDto getMuntourType(@PathVariable Long memberId) {
+    public TypeJoinResponseDto getMuntourType(@Valid @RequestParam("member_id") Long memberId) {
         return usersService.getMuntourType(memberId);
     }
 
