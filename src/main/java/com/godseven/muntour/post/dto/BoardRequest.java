@@ -1,6 +1,5 @@
-package com.godseven.muntour.post;
+package com.godseven.muntour.post.dto;
 
-import com.godseven.muntour.post.dto.BoardDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -13,5 +13,8 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     //검색 기능 구현을 위해
     @Query("SELECT b FROM Board b WHERE b.title LIKE %:keyword% OR b.content LIKE %:keyword%")
     List<Board> searchByTitleOrContent(@Param("keyword") String keyword);
+
+
+
 }
 

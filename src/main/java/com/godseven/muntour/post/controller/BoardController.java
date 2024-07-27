@@ -65,11 +65,9 @@
 package com.godseven.muntour.post.controller;
 
 import com.godseven.muntour.member.domain.Member;
-import com.godseven.muntour.post.BoardRequest;
+import com.godseven.muntour.post.dto.BoardRequest;
 import com.godseven.muntour.post.dto.BoardDto;
 import com.godseven.muntour.post.repository.MemberRepository;
-import com.godseven.muntour.post.repository.TagMappingRepository;
-import com.godseven.muntour.post.repository.TagRepository;
 import com.godseven.muntour.post.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
