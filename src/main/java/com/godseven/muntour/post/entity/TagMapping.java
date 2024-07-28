@@ -24,7 +24,6 @@ public class TagMapping {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    // 정적 팩토리 메서드 추가
     public static TagMapping create(Board board, Tag tag) {
         TagMapping tagMapping = new TagMapping();
         tagMapping.setBoard(board);

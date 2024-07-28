@@ -16,6 +16,6 @@ public class BoardRequest {
     private List<String> tags;
 
     public BoardDto toDto() {
-        return new BoardDto(0, title, content, writer); // 0은 기본 id 값
+        return new BoardDto(0, title, content, writer);
     }
 }

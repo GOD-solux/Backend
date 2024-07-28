@@ -95,14 +95,14 @@ public class BoardService {
         return boardDtos;
     }
 
-    //태그 관련?
+    //태그 관련
     private void addTagsToBoard(Board board, List<String> tags) {
         for (String tagWord : tags) {
             Tag tag = tagRepository.findByWord(tagWord).orElseGet(() -> {
-                Tag newTag = Tag.create(tagWord); // 정적 팩토리 메서드 사용
+                Tag newTag = Tag.create(tagWord);
                 return tagRepository.save(newTag);
             });
-            TagMapping tagMapping = TagMapping.create(board, tag); // 정적 팩토리 메서드 사용
+            TagMapping tagMapping = TagMapping.create(board, tag);
             tagMappingRepository.save(tagMapping);
         }
     }

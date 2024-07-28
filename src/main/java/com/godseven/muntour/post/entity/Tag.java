@@ -25,7 +25,7 @@ public class Tag{
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TagMapping> tagMapping;
 
-    // 정적 팩토리 메서드 추가
+
     public static Tag create(String word) {
         Tag tag = new Tag();
         tag.setWord(word);
