@@ -8,6 +8,8 @@ import com.godseven.muntour.post.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -33,25 +35,19 @@ public class BoardController {
     // 게시글 작성
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/boards/write")
-    //태그 관련> @RequestBody BoardDto boardDto>이걸 BoardRequest boardRequest로 변경
-    public ResponseEntity<ApiResponse> write(@RequestBody BoardRequest boardRequest) {
-        Member member = memberRepository.findById(1).orElseThrow(() -> new RuntimeException("Member not found"));
-        //이것도 태그 추가하면서 추가
+    public ResponseEntity<ApiResponse> write(@RequestBody BoardRequest boardRequest, Authentication authentication) {
+        Member member = getAuthenticatedMember(authentication);
         BoardDto boardDto = boardRequest.toDto();
-        //태그 관련> boardRequest.getTags() 추가
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("성공", "글 작성 성공", boardService.write(boardDto, member,boardRequest.getTags())));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("성공", "글 작성 성공", boardService.write(boardDto, member, boardRequest.getTags())));
     }
 
     // 게시글 수정
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/boards/update/{id}")
-    //태그 관련> @RequestBody BoardDto boardDto>이걸 BoardRequest boardRequest로 변경
-    public ResponseEntity<ApiResponse> edit(@RequestBody BoardRequest boardRequest, @PathVariable("id") Integer id) {
-        Member member = memberRepository.findById(1).orElseThrow(() -> new RuntimeException("Member not found"));
-        //이것도 태그 관련해서 추가
+    public ResponseEntity<ApiResponse> edit(@RequestBody BoardRequest boardRequest, @PathVariable("id") Integer id, Authentication authentication) {
+        Member member = getAuthenticatedMember(authentication);
         BoardDto boardDto = boardRequest.toDto();
-        //태그 관련> boardRequest.getTags() 추가
-        return ResponseEntity.ok(new ApiResponse("성공", "글 수정 성공", boardService.update(id, boardDto,boardRequest.getTags())));
+        return ResponseEntity.ok(new ApiResponse("성공", "글 수정 성공", boardService.update(id, boardDto, boardRequest.getTags())));
     }
 
     // 게시글 삭제
@@ -62,11 +58,25 @@ public class BoardController {
         return ResponseEntity.ok(new ApiResponse("성공", "글 삭제 성공", null));
     }
 
-    // 게시글 검색 -> /boards/search?keyword=검색어 를 통해 찾을 수 있다.
+    // 게시글 검색
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/boards/search")
     public ResponseEntity<ApiResponse> searchBoards(@RequestParam("keyword") String keyword) {
         return ResponseEntity.ok(new ApiResponse("성공", "검색 결과 리턴", boardService.searchBoards(keyword)));
+    }
+
+    // 인증된 사용자 정보를 가져오는 메서드
+    private Member getAuthenticatedMember(Authentication authentication) {
+        String nickname = getNicknameFromAuthentication(authentication);
+        return memberRepository.findByNickname(nickname);
+    }
+
+    private String getNicknameFromAuthentication(Authentication authentication) {
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            return ((UserDetails) authentication.getPrincipal()).getUsername(); // 여기서 username은 실제로 닉네임으로 매핑됩니다.
+        } else {
+            return authentication.getPrincipal().toString();
+        }
     }
 
     // 내부 클래스나 별도 파일로 정의할 수 있는 ApiResponse 클래스
@@ -107,4 +117,3 @@ public class BoardController {
         }
     }
 }
-
