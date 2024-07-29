@@ -1,4 +1,4 @@
-package com.godseven.muntour.member.domain.auth;
+package com.godseven.muntour.auth;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,9 @@
-package com.godseven.muntour.member.domain.auth;
+package com.godseven.muntour.auth;
 
 import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.member.domain.type.Muntour;
-import com.godseven.muntour.member.domain.MemberRequest;
-import com.godseven.muntour.member.service.MemberService;
+import com.godseven.muntour.auth.MemberRequest;
+import com.godseven.muntour.auth.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

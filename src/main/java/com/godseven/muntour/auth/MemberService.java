@@ -1,8 +1,8 @@
-package com.godseven.muntour.member.domain.auth;
+package com.godseven.muntour.auth;
 
 import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.member.domain.type.Muntour;
-import com.godseven.muntour.member.domain.MemberRepository;
+import com.godseven.muntour.auth.MemberRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
