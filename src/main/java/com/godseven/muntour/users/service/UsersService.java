@@ -48,6 +48,9 @@ public class UsersService {
     public Long update(ImageRequestDto requestDto) {
         Long memberId = requestDto.getMemberId();
         String imageUrl = requestDto.getImageUrl();
+        String imageFolder = requestDto.getImageFolder();
+        String imageName = requestDto.getImageName();
+
 
         // 사용자 엔티티 데이터베이스에서 찾기
         Member member = usersRepository.findByMemberId(memberId)
@@ -55,6 +58,8 @@ public class UsersService {
 
         // 이미지 URL 업데이트
         member.setImageUrl(imageUrl);
+        member.setImageFolder(imageFolder);
+        member.setImageName(imageName);
 
         // 변경 사항 저장
         usersRepository.save(member);
