@@ -4,6 +4,7 @@ import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.member.domain.type.Muntour;
 import com.godseven.muntour.auth.MemberRequest;
 import com.godseven.muntour.auth.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +53,10 @@ public class MemberController {
         } else {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutMember(HttpSession session) {
+        session.invalidate(); // 현재 세션 무효화
+        return new ResponseEntity<>("Logout successful", HttpStatus.OK);
     }
 }
