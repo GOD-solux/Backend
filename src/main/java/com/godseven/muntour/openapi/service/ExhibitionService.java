@@ -21,7 +21,7 @@ public class ExhibitionService implements OpenApiService<ExhibitionResponse> {
     /**
      * 전시회 리스트 불러오기
      */
-    public ExhibitionResponseList getExhibitionList(int pageNo) {
+    public ExhibitionResponseList getExhibitionList(Integer pageNo) {
         List<ExhibitionResponse> exhibitions = fetchData(pageNo);
         return ExhibitionResponseList.from(exhibitions);
     }

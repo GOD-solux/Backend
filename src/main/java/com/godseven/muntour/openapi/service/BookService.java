@@ -20,7 +20,7 @@ public class BookService implements OpenApiService<BookResponse> {
     /**
      * 추천 도서 목록 보기
      */
-    public BookResponseList getBookList(int pageNo) {
+    public BookResponseList getBookList(Integer pageNo) {
         List<BookResponse> bookResponses = fetchData(pageNo);
         return BookResponseList.from(bookResponses);
     }

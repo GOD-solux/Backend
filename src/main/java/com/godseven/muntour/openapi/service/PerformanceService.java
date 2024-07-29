@@ -21,7 +21,7 @@ public class PerformanceService implements OpenApiService<PerformanceResponse>{
     /**
      * 공연 목록 불러오기
      */
-    public PerformanceResponseList getPerformanceList(int pageNo) {
+    public PerformanceResponseList getPerformanceList(Integer pageNo) {
         List<PerformanceResponse> performanceResponses = fetchData(pageNo);
         return PerformanceResponseList.from(performanceResponses);
     }
