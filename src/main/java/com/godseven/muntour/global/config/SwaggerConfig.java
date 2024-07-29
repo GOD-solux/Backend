@@ -10,4 +10,6 @@ import org.springframework.context.annotation.Configuration;
                 version = "v1"))
 @Configuration
 public class SwaggerConfig {
+
 }
+
