@@ -1,9 +1,10 @@
 package com.godseven.muntour.post.controller;
 
+import com.godseven.muntour.auth.MemberRepository;
 import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.post.dto.BoardRequest;
 import com.godseven.muntour.post.dto.BoardDto;
-import com.godseven.muntour.post.repository.MemberRepository;
+//import com.godseven.muntour.post.repository.MemberRepository;
 import com.godseven.muntour.post.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -68,7 +69,7 @@ public class BoardController {
     // 인증된 사용자 정보를 가져오는 메서드
     private Member getAuthenticatedMember(Authentication authentication) {
         String nickname = getNicknameFromAuthentication(authentication);
-        return memberRepository.findByNickname(nickname);
+        return memberRepository.findByNickname(nickname).orElseThrow(() -> new RuntimeException("Member not found"));
     }
 
     private String getNicknameFromAuthentication(Authentication authentication) {
