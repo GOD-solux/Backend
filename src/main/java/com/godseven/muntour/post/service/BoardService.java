@@ -106,4 +106,13 @@ public class BoardService {
             tagMappingRepository.save(tagMapping);
         }
     }
+
+    //카테고리별 조회
+    @org.springframework.transaction.annotation.Transactional(readOnly=true)
+    public List<BoardDto> getCategoryBoards(String category){
+        List<Board> boards= boardRepository.findByCategory(category);
+        List<BoardDto> boardDtos=new ArrayList<>();
+        boards.forEach(s-> boardDtos.add(BoardDto.toDto(s)));
+        return boardDtos;
+    }
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "heart")
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
