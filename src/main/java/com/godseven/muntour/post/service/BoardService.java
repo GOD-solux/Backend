@@ -2,6 +2,7 @@ package com.godseven.muntour.post.service;
 
 import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.post.dto.BoardDto;
+import com.godseven.muntour.post.dto.PostDto;
 import com.godseven.muntour.post.entity.Board;
 import com.godseven.muntour.post.entity.Tag;
 import com.godseven.muntour.post.entity.TagMapping;
@@ -42,39 +43,39 @@ public class BoardService {
         return boardDto;
     }
 
-    //게시물 작성
-    @org.springframework.transaction.annotation.Transactional
-    //member
-    //태그 구현을 위해 List<String> tags 추가
-    public BoardDto write(BoardDto boardDto, Member member, List<String> tags){
-        Board board = new Board();
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-        board.setMember(member);
-        boardRepository.save(board);
-
-        //태그 추가
-        addTagsToBoard(board,tags);
-
-        return BoardDto.toDto(board);
-    }
-
-    //게시물 수정
-    @Transactional
-    //태그 구현을 위해 List<String> tags 추가
-    public BoardDto update(int id, BoardDto boardDto, List<String> tags){
-        Board board=boardRepository.findById(id).orElseThrow(()->{
-            return new IllegalArgumentException("Board Id를 찾을 수 없습니다!");
-        });
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-
-        //태그 관련> 기존 태그 삭제 후 새 태그
-        tagMappingRepository.deleteAll(board.getTagMappings());
-        addTagsToBoard(board, tags);
-
-        return BoardDto.toDto(board);
-    }
+//    //게시물 작성
+//    @org.springframework.transaction.annotation.Transactional
+//    //member
+//    //태그 구현을 위해 List<String> tags 추가
+//    public BoardDto write(BoardDto boardDto, Member member, List<String> tags){
+//        Board board = new Board();
+//        board.setTitle(boardDto.getTitle());
+//        board.setContent(boardDto.getContent());
+//        board.setMember(member);
+//        boardRepository.save(board);
+//
+//        //태그 추가
+//        addTagsToBoard(board,tags);
+//
+//        return BoardDto.toDto(board);
+//    }
+//
+//    //게시물 수정
+//    @Transactional
+//    //태그 구현을 위해 List<String> tags 추가
+//    public BoardDto update(int id, BoardDto boardDto, List<String> tags){
+//        Board board=boardRepository.findById(id).orElseThrow(()->{
+//            return new IllegalArgumentException("Board Id를 찾을 수 없습니다!");
+//        });
+//        board.setTitle(boardDto.getTitle());
+//        board.setContent(boardDto.getContent());
+//
+//        //태그 관련> 기존 태그 삭제 후 새 태그
+//        tagMappingRepository.deleteAll(board.getTagMappings());
+//        addTagsToBoard(board, tags);
+//
+//        return BoardDto.toDto(board);
+//    }
 
     //게시글 삭제
     @Transactional
@@ -115,4 +116,32 @@ public class BoardService {
         boards.forEach(s-> boardDtos.add(BoardDto.toDto(s)));
         return boardDtos;
     }
+
+    //게시물 작성
+    @org.springframework.transaction.annotation.Transactional
+    //member
+    //태그 구현을 위해 List<String> tags 추가
+    public PostDto write(PostDto postDto, Member member){
+        Board board = new Board();
+        board.setTitle(postDto.getTitle());
+        board.setContent(postDto.getContent());
+        board.setCategory(postDto.getCategory());
+        board.setMember(member);
+        boardRepository.save(board);
+        return PostDto.toDto(board);
+    }
+
+    //게시물 수정
+    @Transactional
+    //태그 구현을 위해 List<String> tags 추가
+    public PostDto update(int id, PostDto postDto){
+        Board board=boardRepository.findById(id).orElseThrow(()->{
+            return new IllegalArgumentException("Board Id를 찾을 수 없습니다!");
+        });
+        board.setTitle(postDto.getTitle());
+        board.setContent(postDto.getContent());
+        board.setCategory(postDto.getCategory());
+        return PostDto.toDto(board);
+    }
+
 }

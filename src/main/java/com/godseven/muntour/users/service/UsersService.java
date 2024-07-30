@@ -6,8 +6,8 @@ import com.godseven.muntour.users.dto.TypeJoinResponseDto;
 import com.godseven.muntour.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsersService {
 
     private final UsersRepository usersRepository;
-    private final PasswordEncoder encoder;;
+    //private final PasswordEncoder encoder;;
 
 //    public UsersService(UsersRepository userRepository) {
 //        this.usersRepository = userRepository;
@@ -38,7 +38,7 @@ public class UsersService {
             return false;
         }
 
-        member.setPassword(encoder.encode(newPassword));
+        //member.setPassword(encoder.encode(newPassword));
         usersRepository.save(member);
 
         return true;
