@@ -33,7 +33,7 @@ public class MemberService {
     public Member registerMember(String id, String password, String nickname, Muntour muntourType, String imageUrl, String imageFolder, String imageName) {
         // ID 중복 확인
         if (memberRepository.findById(id).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID가 이미 존재합니다.");
         }
 
         // 비밀번호 암호화

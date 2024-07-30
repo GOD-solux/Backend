@@ -2,8 +2,6 @@ package com.godseven.muntour.auth;
 
 import com.godseven.muntour.member.domain.Member;
 import com.godseven.muntour.member.domain.type.Muntour;
-import com.godseven.muntour.auth.MemberRequest;
-import com.godseven.muntour.auth.MemberService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,10 @@ public class MemberController {
     // 회원가입 처리
     @PostMapping("/signup")
     public ResponseEntity<String> registerMember(@RequestBody MemberRequest memberRequest) {
+        if (!memberRequest.getPassword().equals(memberRequest.getConfirmPassword())) {
+            return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+
         try {
             Muntour muntourType = Muntour.valueOf(memberRequest.getMuntourType()); // Muntour 타입으로 변환
 
@@ -36,11 +38,11 @@ public class MemberController {
                     memberRequest.getImageFolder(),
                     memberRequest.getImageName()
             );
-            return new ResponseEntity<>("Member registered successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("로그인 성공", HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Invalid Muntour type", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error during registration", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("로그인 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,6 +56,8 @@ public class MemberController {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
     }
+
+    // 로그아웃 처리
     @PostMapping("/logout")
     public ResponseEntity<String> logoutMember(HttpSession session) {
         session.invalidate(); // 현재 세션 무효화
