@@ -80,6 +80,13 @@ public class BoardController {
         }
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/boards/category")
+    public ResponseEntity<ApiResponse> getCategoryList(@RequestParam(name = "category") String category) {
+        return ResponseEntity.ok(new ApiResponse("성공", "전체 게시물 리턴", boardService.getCategoryBoards(category)));
+    }
+
+
     // 내부 클래스나 별도 파일로 정의할 수 있는 ApiResponse 클래스
     private static class ApiResponse {
         private String status;
