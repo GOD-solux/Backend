@@ -1,30 +1,27 @@
 package com.godseven.muntour.post.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Tag{
-
+public class Tag {
     @Id
-    @GeneratedValue
-    @Column(name = "tag_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "word", nullable = false)
+    @Column(nullable = false, unique = true)
     private String word;
 
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<TagMapping> tagMapping;
-
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TagMapping> tagMappings = new ArrayList<>();
 
     public static Tag create(String word) {
         Tag tag = new Tag();

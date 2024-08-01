@@ -26,12 +26,10 @@ public class Board {
     @Column(nullable = false)
     private String category;
 
-    //User user -> Member member
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    //해시태그 관련
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TagMapping> tagMappings;
 }

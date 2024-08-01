@@ -14,6 +14,7 @@ public class PostDto {
     private String content;
     private String writer;
     private String category;
+    private String hashtag;
 
     public static PostDto toDto(Board board){
         return new PostDto(
@@ -21,6 +22,8 @@ public class PostDto {
                 board.getTitle(),
                 board.getContent(),
                 board.getMember().getNickname(),
-                board.getCategory());
+                board.getCategory(),
+                null // 해시태그는 추후 로직에서 처리
+        );
     }
 }
